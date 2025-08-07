@@ -11,12 +11,12 @@ def init_group_of_symbols(seed):
     return SYMBOLS_GROUP
 
 def generate_mask(seed, length):
-    """Генерирует битовую маску заданной длины с фиксированным seed."""
+    """Генерирует битовую маску заданной длины"""
     rng = random.Random(seed)
     return ''.join(rng.choice('01') for _ in range(length))
 
 def encrypt(text, n):
-    """Шифрует строку с использованием маски силы n."""
+    """Шифрует строку"""
     if not text:
         return ""
     
@@ -36,7 +36,7 @@ def encrypt(text, n):
     return ''.join(random.choice(char_sets[pair]) for pair in pairs)
 
 def decrypt(cipher_text, n):
-    """Дешифрует строку, используя маску силы n."""
+    """Дешифрует строку"""
     if not cipher_text:
         return ""
     
@@ -70,22 +70,3 @@ def decrypt(cipher_text, n):
         return byte_array.decode('utf-8')
     except:
         return None
-
-if __name__ == '__main__':
-    while True:
-        mode = int(input("\033[1mВыберите что вы хотите сделать:\033[0m\n0 - Зашифровать строку\n1 - Расшифровать строку\n2 - Завершить выполнение программы\n>>> \033[32m"))
-        if not mode:
-            user_input = input("\033[0m\nВведите строку:\n>>> \033[32m")
-            seed = int(input("\033[0mВведите код для шифрования:\n>>> \033[32m"))
-            print(f"\033[0m\033[1m\nЗашифрованная строка:\033[0m\033[33m\n{encrypt(user_input, seed)}\033[0m\n")
-        elif mode == 1:
-            user_input = input("\033[0m\nВведите строку:\n>>> \033[32m")
-            seed = int(input("\033[0mВведите код для расшифрования:\n>>> \033[32m"))
-            output = decrypt(user_input, seed)
-            if output != None:
-                print(f"\033[0m\033[1m\nРасшифрованная строка:\033[0m\033[33m\n{output}\033[0m\n")
-            else:
-                print("\n\033[31m\033[1mОшибка\033[0m\nВозможно вы ввели неправильный код\n")
-        else:
-            print("\033[0m")
-            break
